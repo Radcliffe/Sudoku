@@ -19,7 +19,7 @@
       padding: 0;
     }
     table input {
-      font-size: 14px;
+      font-size: 16px;
       height: 30px;
       text-align: center;
       width: 30px;
@@ -27,11 +27,30 @@
     table input:not([readonly]) {
       font-weight: bold;
     }
+    table input::placeholder {
+        color: grey;
+    }
     tr:nth-child(3n):not(:last-child) > td {
       border-bottom: 1px solid #666;
     }
     td:nth-child(3n):not(:last-child) {
       border-right: 1px solid #666;
+    }
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        margin: 10px;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+    #success {
+        display: none;
+        font-size: 32px;
+        font-weight: bold;
     }
   </style>
     <script
@@ -146,12 +165,21 @@
       </tbody>
     </table>
   </div>
+  <div id="controls">
+      <button id="reset">Reset</button>
+      <button id="cheat">Show solution</button>
+  </div>
+  <div id="success">
+      <p>You did it!</p>
+  </div>
 </div>
 <script>
     $(document).ready(() => {
-        $('input').removeAttr('readonly').val('');
+        $('input').val('');
         $.get("/api/sudoku", function(data, status){
             if (data.puzzle && data.puzzle.length === 81) {
+                data.start = data.puzzle;
+                $('input').removeAttr('');
                 for (let i = 0; i < 81; i++) {
                     let x = i % 9;
                     let y = Math.floor(i / 9);
@@ -162,9 +190,46 @@
                             .attr('readonly', 'readonly');
                     }
                 }
+
+                $(document).on('change', 'input', (e) => {
+                    for (let i = 0; i < 81; i++) {
+                        let x = i % 9;
+                        let y = Math.floor(i / 9);
+                        if ($(`input[data-x='${x}'][data-y='${y}']`).val() != data.solution[i]) {
+                            $('#success').hide();
+                            return false;
+                        }
+                    }
+                    $('#success').show();
+                    $('input').attr('readonly', 'readonly');
+                });
+
+                $('#reset').click((e) => {
+                    e.preventDefault();
+                    $('#success').hide();
+                    $('input').attr('readonly', 'readonly');
+                    for (let i = 0; i < 81; i++) {
+                        if (data.start[i] === '0') {
+                            let x = i % 9;
+                            let y = Math.floor(i / 9);
+                            $(`input[data-x='${x}'][data-y='${y}']`).val('').removeAttr('readonly');
+                        }
+                    }
+                });
+
+                $('#cheat').click((e) => {
+                    for (let i = 0; i < 81; i++) {
+                        let x = i % 9;
+                        let y = Math.floor(i / 9);
+                        $(`input[data-x='${x}'][data-y='${y}']`).val(data.solution[i]).attr('readonly', 'readonly');
+                    }
+                })
             }
         });
     });
+
+
+
 
 </script>
 </body>
