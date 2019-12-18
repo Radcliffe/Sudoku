@@ -6,7 +6,6 @@ $(document).ready(() => {
     input.val('');
     $.get("/api/sudoku", function(data, status){
         if (data.puzzle && data.puzzle.length === 81) {
-            input.removeAttr('');
             for (let i = 0; i < 81; i++) {
                 let v = data.puzzle[i];
                 if (v !== '0') {
