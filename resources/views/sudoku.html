@@ -1,0 +1,172 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Sudoku</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style id="compiled-css" type="text/css">
+    body {
+      font-family: 'Lucida Grande', Helvetica, sans-serif;
+    }
+    /* Sudoku */
+    table {
+      border: 1px solid #666;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 0;
+    }
+    table input {
+      font-size: 14px;
+      height: 30px;
+      text-align: center;
+      width: 30px;
+    }
+    table input:not([readonly]) {
+      font-weight: bold;
+    }
+    tr:nth-child(3n):not(:last-child) > td {
+      border-bottom: 1px solid #666;
+    }
+    td:nth-child(3n):not(:last-child) {
+      border-right: 1px solid #666;
+    }
+  </style>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root">
+  <div>
+    <table>
+      <tbody>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="0"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="0"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="1"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="1"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="2"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="2"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="3"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="3"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="4"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="4"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="5"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="5"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="6"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="6"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="7"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="7"></td>
+      </tr>
+      <tr>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="0" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="1" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="2" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="3" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="4" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="5" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="6" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="7" data-y="8"></td>
+        <td><input type="text" pattern="[0-9]" maxlength="1" formnovalidate="formnovalidate" data-x="8" data-y="8"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+    $(document).ready(() => {
+        $('input').removeAttr('readonly').val('');
+        $.get("http://sudoku/api/sudoku", function(data, status){
+            if (data.puzzle && data.puzzle.length === 81) {
+                for (let i = 0; i < 81; i++) {
+                    let x = i % 9;
+                    let y = Math.floor(i / 9);
+                    let v = data.puzzle[i];
+                    if (v !== '0') {
+                        $(`input[data-x='${x}'][data-y='${y}']`)
+                            .val(v)
+                            .attr('readonly', 'readonly');
+                    }
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
+
