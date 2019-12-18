@@ -178,7 +178,6 @@
         $('input').val('');
         $.get("/api/sudoku", function(data, status){
             if (data.puzzle && data.puzzle.length === 81) {
-                data.start = data.puzzle;
                 $('input').removeAttr('');
                 for (let i = 0; i < 81; i++) {
                     let x = i % 9;
@@ -209,7 +208,7 @@
                     $('#success').hide();
                     $('input').attr('readonly', 'readonly');
                     for (let i = 0; i < 81; i++) {
-                        if (data.start[i] === '0') {
+                        if (data.puzzle [i] === '0') {
                             let x = i % 9;
                             let y = Math.floor(i / 9);
                             $(`input[data-x='${x}'][data-y='${y}']`).val('').removeAttr('readonly');
