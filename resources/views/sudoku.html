@@ -204,6 +204,13 @@
                 }
 
                 $(document).on('change', 'input', (e) => {
+                    // validate input
+                    const target = $(e.target);
+                    const val = target.val();
+                    if (val < '1' || val > '9' || val.length > 1) {
+                        target.val('');
+                    }
+                    // check for complete solution
                     for (let i = 0; i < 81; i++) {
                         if ($(`input[data-index='${i}']`).val() !== data.solution[i]) {
                             success.hide();
