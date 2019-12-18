@@ -187,10 +187,13 @@
 <script>
     $(document).ready(() => {
         const success = $('#success');
-        $('input').val('');
+        const input = $('input');
+        const reset = $('#reset');
+        const cheat = $('#cheat');
+        input.val('');
         $.get("/api/sudoku", function(data, status){
             if (data.puzzle && data.puzzle.length === 81) {
-                $('input').removeAttr('');
+                input.removeAttr('');
                 for (let i = 0; i < 81; i++) {
                     let v = data.puzzle[i];
                     if (v !== '0') {
@@ -208,23 +211,21 @@
                         }
                     }
                     success.show();
-                    $('input').attr('readonly', 'readonly');
+                    input.attr('readonly', 'readonly');
                 });
 
-                $('#reset').click((e) => {
+                reset.click((e) => {
                     e.preventDefault();
-                    $('#success').hide();
-                    $('input').attr('readonly', 'readonly');
+                    success.hide();
+                    input.attr('readonly', 'readonly');
                     for (let i = 0; i < 81; i++) {
                         if (data.puzzle [i] === '0') {
-                            let x = i % 9;
-                            let y = Math.floor(i / 9);
                             $(`input[data-index='${i}']`).val('').removeAttr('readonly');
                         }
                     }
                 });
 
-                $('#cheat').click((e) => {
+                cheat.click((e) => {
                     for (let i = 0; i < 81; i++) {
                         $(`input[data-index='${i}']`).val(data.solution[i]).attr('readonly', 'readonly');
                     }
