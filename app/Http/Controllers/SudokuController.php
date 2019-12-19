@@ -25,8 +25,10 @@ class SudokuController extends Controller {
         $show_puzzle = $request->get('puzzle', '1');
         $show_solution = $request->get('solution', '1');
         $sparse = $request->get('sparse', '0');
+        $variant = $request->get('variant', 'random');
 
         $sudoku = Sudoku::find($id);
+        Sudoku::permute($sudoku, $variant);
         if ($sparse == '1') {
             $puzzle = [];
             $solution = [];
