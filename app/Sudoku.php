@@ -21,10 +21,6 @@ class Sudoku extends Model {
     }
 
     static function permute(&$sudoku, $index) {
-        if ($index == 'random') {
-            $index = rand(0, 1218998108159);
-        }
-        $sudoku['variant'] = $index;
         $values = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         Sudoku::shuffle($values, $index);
         array_unshift($values, 0);

@@ -25,9 +25,15 @@ class SudokuController extends Controller {
         $show_puzzle = $request->get('puzzle', '1');
         $show_solution = $request->get('solution', '1');
         $sparse = $request->get('sparse', '0');
-        $variant = $request->get('variant', 'random');
+        if ($request->has('variant')) {
+            $variant = (int) $request->get('variant');
+        } else {
+            $variant = rand(0, 1218998108159);
+        }
 
         $sudoku = Sudoku::find($id);
+        $sudoku['url'] = "http://radcliffe.cc/api/sudoku?size=9&id=$id&variant=$variant&sparse=$sparse";
+        $sudoku['variant'] = $variant;
         Sudoku::permute($sudoku, $variant);
         if ($sparse == '1') {
             $puzzle = [];
