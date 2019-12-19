@@ -12,6 +12,10 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
   <script src="/scripts/main.js"></script>
+  <script>
+     var params = <?php echo json_encode($params); ?>;
+     console.log(params);
+  </script>
 </head>
 <body>
 <div id="root">

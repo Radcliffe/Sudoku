@@ -4,7 +4,7 @@ $(document).ready(() => {
     const reset = $('#reset');
     const cheat = $('#cheat');
     input.val('');
-    $.get("/api/sudoku", function(data, status){
+    $.get("/api/sudoku", params, function(data, status){
         if (data.puzzle && data.puzzle.length === 81) {
             for (let i = 0; i < 81; i++) {
                 let v = data.puzzle[i];

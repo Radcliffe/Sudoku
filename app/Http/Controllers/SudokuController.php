@@ -7,6 +7,7 @@ use App\Sudoku;
 use Illuminate\Http\Request;
 
 class SudokuController extends Controller {
+
     public function showOneSudoku(Request $request) {
         $size = $request->get('size', 9);
         if ($size != '9') {
