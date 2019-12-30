@@ -59,7 +59,7 @@ class Sudoku extends Model {
      * @var array
      */
      protected $fillable = [
-        'puzzle', 'solution'
+        'puzzle', 'solution', 'clues',
     ];
 
 
